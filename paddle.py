@@ -1,24 +1,25 @@
 from turtle import Turtle
 
-PADDLE_POSITION = (350, 0)
 DEFAULT_MOVE = 20
 
-class Paddle:
+class Paddle(Turtle):
 
-  def __init__(self):
-    self.create_paddle()
+  def __init__(self, position):
+    super().__init__()
+    self.position = position
+    self.create_paddle()    
 
   def create_paddle(self):
-    self.paddle = Turtle(shape="square")
-    self.paddle.color("white")
-    self.paddle.penup()
-    self.paddle.shapesize(stretch_wid=5, stretch_len=1)
-    self.paddle.goto(PADDLE_POSITION)
+    self.shape("square")
+    self.color("white")
+    self.penup()
+    self.shapesize(stretch_wid=5, stretch_len=1)
+    self.goto(self.position)
 
   def go_up(self):
-    new_y_position = self.paddle.ycor() + DEFAULT_MOVE
-    self.paddle.goto(self.paddle.xcor(), new_y_position)
+    new_y_position = self.ycor() + DEFAULT_MOVE
+    self.goto(self.xcor(), new_y_position)
 
   def go_down(self):
-    new_y_position = self.paddle.ycor() - DEFAULT_MOVE
-    self.paddle.goto(self.paddle.xcor(), new_y_position)
+    new_y_position = self.ycor() - DEFAULT_MOVE
+    self.goto(self.xcor(), new_y_position)

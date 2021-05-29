@@ -11,13 +11,16 @@ screen.tracer(0)
 # Variables
 is_game_on = True
 
-# Creating a paddle on screen
-paddle = Paddle()
+# Creating the paddles on the screen
+r_paddle = Paddle((350, 0))
+l_paddle = Paddle((-350, 0))
 
 # Listening for a keypress to move the paddle
 screen.listen()
-screen.onkeypress(paddle.go_up, "Up")
-screen.onkeypress(paddle.go_down, "Down")
+screen.onkeypress(r_paddle.go_up, "Up")
+screen.onkeypress(r_paddle.go_down, "Down")
+screen.onkeypress(l_paddle.go_up, "w")
+screen.onkeypress(l_paddle.go_down, "s")
 
 while is_game_on:
   screen.update()
