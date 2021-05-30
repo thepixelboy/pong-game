@@ -1,6 +1,7 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 # Setting up the screen
@@ -13,10 +14,11 @@ screen.tracer(0)
 # Variables
 is_game_on = True
 
-# Creating the paddles on the screen
+# Creating the paddles, ball and scoreboard on the screen
 r_paddle = Paddle((350, 0))
 l_paddle = Paddle((-350, 0))
 ball = Ball()
+scoreboard = Scoreboard()
 
 # Listening for a keypress to move the paddle
 screen.listen()
@@ -26,7 +28,7 @@ screen.onkeypress(l_paddle.go_up, "w")
 screen.onkeypress(l_paddle.go_down, "s")
 
 while is_game_on:
-  time.sleep(0.1)
+  time.sleep(ball.move_speed)
   screen.update()
   ball.move()
 
@@ -41,10 +43,12 @@ while is_game_on:
 
   # Detect r_paddle misses
   if ball.xcor() > 380:
+    scoreboard.l_point()
     ball.reset_position()
   
   # Detect l_maddle misses
   if ball.xcor() < -380:
+    scoreboard.r_point()
     ball.reset_position()
 
 screen.exitonclick()
