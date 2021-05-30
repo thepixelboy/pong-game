@@ -14,6 +14,10 @@ screen.tracer(0)
 # Variables
 is_game_on = True
 
+# Functions
+def exit_game():
+  globals()["is_game_on"] = False
+
 # Creating the paddles, ball and scoreboard on the screen
 r_paddle = Paddle((350, 0))
 l_paddle = Paddle((-350, 0))
@@ -26,6 +30,7 @@ screen.onkeypress(r_paddle.go_up, "Up")
 screen.onkeypress(r_paddle.go_down, "Down")
 screen.onkeypress(l_paddle.go_up, "w")
 screen.onkeypress(l_paddle.go_down, "s")
+screen.onkeypress(exit_game, "q")
 
 while is_game_on:
   time.sleep(ball.move_speed)
@@ -38,7 +43,7 @@ while is_game_on:
     ball.bounce_y()
 
   # Detect collision with paddle
-  if ball.distance(r_paddle) < 50 and ball.xcor() > 320 or ball.distance(l_paddle) < 50 and ball.xcor() < -320:
+  if ball.distance(r_paddle) < 55 and ball.xcor() > 320 or ball.distance(l_paddle) < 55 and ball.xcor() < -320:
     ball.bounce_x()
 
   # Detect r_paddle misses
